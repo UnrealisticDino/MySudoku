@@ -1,0 +1,100 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Sudoku/Scripts/MainMenu.gd" type="Script" id=2]
+
+[sub_resource type="GDScript" id=2]
+script/source = "# StartGame.gd
+extends Button
+
+func _ready():
+	# Connect the \"pressed\" signal to the _on_StartGame_pressed function
+	connect(\"pressed\", self, \"_on_StartGame_pressed\")
+
+func _on_StartGame_pressed():
+	# Load the config file
+	var config = ConfigFile.new()
+	var config_path = \"user://settings.cfg\"
+	var error = config.load(config_path)
+
+	# Check for error in loading the config file
+	if error != OK:
+		print(\"Error loading config file: \", error)
+		return
+
+	# Read the difficulty setting from the config file
+	# Ensure the section and key match what's used in the Settings script
+	var difficulty_setting = config.get_value(\"difficulty\", \"selected\", \"Easy\")
+
+	# Print the difficulty setting for debugging
+	print(\"Difficulty setting: \" + difficulty_setting)
+
+	# Translate the difficulty setting to numeric value
+	var difficulty_level = 0  # Default to Easy
+	if difficulty_setting == \"Medium\":
+		difficulty_level = 1
+	elif difficulty_setting == \"Hard\":
+		difficulty_level = 2
+
+	# Create an instance of the Sudoku class
+	var sudoku_script = load(\"res://TMP/Sudokutmpgenerator.gd\").new()
+
+	# Generate a sudoku puzzle with the determined difficulty level
+	sudoku_script.gen(difficulty_level)
+
+	# Get the generated grid from the Sudoku instance
+	var generated_puzzle = sudoku_script.get_grid()
+	Global.puzzle = generated_puzzle
+	print(Global.puzzle)
+	# Transition to the sudoku.tscn scene
+	get_tree().change_scene(\"res://Scenes/Sudoku.tscn\")
+"
+
+[sub_resource type="GDScript" id=1]
+script/source = "# GoToSettings
+extends Button
+
+func _ready():
+	# Connect the \"pressed\" signal to the _on_StartButton_pressed function
+	connect(\"pressed\", self, \"_on_StartButton_pressed\")
+
+func _on_StartButton_pressed():
+	# Change the scene to GameScene.tscn when the button is pressed
+	get_tree().change_scene(\"res://Scenes/Settings.tscn\")
+"
+
+[node name="MainMenu" type="Panel"]
+margin_left = -1.0
+margin_top = 1.0
+margin_right = 1079.0
+margin_bottom = 1921.0
+script = ExtResource( 2 )
+
+[node name="StartGame" type="Button" parent="."]
+margin_left = 230.0
+margin_top = 439.0
+margin_right = 854.0
+margin_bottom = 637.0
+text = "Start"
+script = SubResource( 2 )
+
+[node name="Settings" type="Button" parent="."]
+margin_left = 175.0
+margin_top = 830.0
+margin_right = 972.0
+margin_bottom = 1083.0
+text = "Settings"
+script = SubResource( 1 )
+
+[node name="Exit" type="Button" parent="."]
+margin_left = 285.0
+margin_top = 1322.0
+margin_right = 851.0
+margin_bottom = 1605.0
+text = "Exit"
+
+[node name="Label" type="Label" parent="."]
+margin_left = 302.0
+margin_top = 41.0
+margin_right = 859.0
+margin_bottom = 106.0
+text = "New Sudoku Game 1.0"
