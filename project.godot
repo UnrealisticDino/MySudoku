@@ -1,0 +1,56 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+[application]
+
+config/name="My Sudoku"
+run/main_scene="res://Scenes/MainMenu.tscn"
+config/use_hidden_project_data_directory=false
+run/low_processor_mode=true
+boot_splash/image="res://Images/Default/splashscreen.png"
+boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
+config/icon="res://Images/Default/IconTest.png"
+config/quit_on_go_back=false
+
+[autoload]
+
+Global="*res://Sudoku/Scripts/Singletons/Global.gd"
+GameState="*res://Sudoku/Scripts/Singletons/GameState.gd"
+ButtonManager="*res://Sudoku/Scripts/SaveFiles/ButtonManager.gd"
+ButtonThemeManager="*res://Sudoku/Scripts/Singletons/ButtonThemeManager.gd"
+SudokuGenerator="res://Sudoku/Scripts/SudokuGenerator/SudokuGenerator.gd"
+
+[display]
+
+window/size/width=1080
+window/size/height=1920
+window/handheld/orientation="sensor"
+window/ios/hide_home_indicator=false
+
+[global]
+
+alias=false
+
+[gui]
+
+common/drop_mouse_on_gui_input_disabled=true
+
+[locale]
+
+locale_filter=[ 0, [  ] ]
+translations=PoolStringArray( "res://Languages/Translation.en.translation", "res://Languages/Translation.es.translation" )
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
