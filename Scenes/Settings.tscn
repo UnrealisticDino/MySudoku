@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/SettingsControl.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Language.gd" type="Script" id=2]
+
+[node name="SettingsControl" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+
+[node name="BackgroundColor" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="MenuLandscape" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="MenuPortrait" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="CenterContainer" type="CenterContainer" parent="MenuPortrait"]
+margin_top = 200.0
+margin_right = 1080.0
+margin_bottom = 116.0
+
+[node name="GridContainer" type="GridContainer" parent="MenuPortrait/CenterContainer"]
+margin_left = 516.0
+margin_right = 564.0
+margin_bottom = 116.0
+
+[node name="Language" type="Button" parent="MenuPortrait/CenterContainer/GridContainer"]
+margin_right = 48.0
+margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "LANG"
+script = ExtResource( 2 )
+
+[node name="StartGame2" type="Button" parent="MenuPortrait/CenterContainer/GridContainer"]
+margin_top = 24.0
+margin_right = 48.0
+margin_bottom = 44.0
+text = "Start"
+
+[node name="StartGame3" type="Button" parent="MenuPortrait/CenterContainer/GridContainer"]
+margin_top = 48.0
+margin_right = 48.0
+margin_bottom = 68.0
+text = "Start"
+
+[node name="StartGame4" type="Button" parent="MenuPortrait/CenterContainer/GridContainer"]
+margin_top = 72.0
+margin_right = 48.0
+margin_bottom = 92.0
+text = "Start"
+
+[node name="StartGame5" type="Button" parent="MenuPortrait/CenterContainer/GridContainer"]
+margin_top = 96.0
+margin_right = 48.0
+margin_bottom = 116.0
+text = "Start"
+
+[connection signal="button_up" from="MenuPortrait/CenterContainer/GridContainer/Language" to="MenuPortrait/CenterContainer/GridContainer/Language" method="_on_Language_button_up"]
